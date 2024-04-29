@@ -5,5 +5,7 @@
  "arabic" : "Arabic",
  "theme_mode" : "Theme Mode",
  "dark" : "Dark",
- "light" : "Light"
+ "light" : "Light",
+ "setting" :"Setting",
+ "list" : "List"
 }
