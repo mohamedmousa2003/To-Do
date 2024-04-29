@@ -1,0 +1,9 @@
+{
+ "title" : "TO Do List",
+ "language" : "Language" ,
+ "english" : "English",
+ "arabic" : "Arabic",
+ "theme_mode" : "Theme Mode",
+ "dark" : "Dark",
+ "light" : "Light"
+}
