@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/core/my-provider.dart';
 import 'package:todo/core/theme.dart';
 import 'package:todo/pages/bottom_navigationBar/home_layout.dart';
 import 'package:todo/pages/splash/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => MyProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,13 +17,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TO DO',
       initialRoute: SplashScreen.routeName,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale("en"),
+      locale: Locale(provider.localeProvider),
       theme: ApplicationTheme.themeLight,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),

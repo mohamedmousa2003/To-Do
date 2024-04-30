@@ -26,7 +26,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: screens[indexSelect],
       bottomNavigationBar: BottomNavigationBar(
