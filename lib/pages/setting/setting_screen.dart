@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/core/my-provider.dart';
+import 'package:todo/pages/setting/widget/BottomLanguage.dart';
+import 'package:todo/pages/setting/widget/BottomTheme.dart';
 
 import '../../core/app_color.dart';
 
@@ -15,6 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var local = AppLocalizations.of(context)!;
+    var provider = Provider.of<MyProvider>(context);
     return Scaffold(
       backgroundColor: primaryLight,
       appBar: AppBar(
@@ -34,7 +39,11 @@ class _SettingScreenState extends State<SettingScreen> {
               local.language,
               style: theme.textTheme.bodyMedium,
             ),
-            builderSetting(index: 0, local: local.arabic),
+            builderSetting(
+                index: 0,
+                local: provider.localeProvider == "en"
+                    ? local.english
+                    : local.arabic),
             const SizedBox(height: 20),
             Text(
               local.theme_mode,
@@ -77,11 +86,11 @@ class _SettingScreenState extends State<SettingScreen> {
 
   builderShowModalBottomLanguage() {
     return showModalBottomSheet(
-        context: context, builder: (context) => Container());
+        context: context, builder: (context) => BottomLanguage());
   }
 
   builderShowModalBottomTheme() {
     return showModalBottomSheet(
-        context: context, builder: (context) => Container());
+        context: context, builder: (context) => BottomTheme());
   }
 }

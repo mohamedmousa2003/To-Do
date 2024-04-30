@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todo/pages/bottom_navigationBar/widget/bottom_task.dart';
 import 'package:todo/pages/home/home_screen.dart';
 import 'package:todo/pages/setting/setting_screen.dart';
 
@@ -25,8 +26,10 @@ class _HomeLayoutState extends State<HomeLayout> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+        onPressed: () {
+          _builderSowTak();
+        },
+        child: const Icon(Icons.add),
       ),
       body: screens[indexSelect],
       bottomNavigationBar: BottomNavigationBar(
@@ -43,5 +46,10 @@ class _HomeLayoutState extends State<HomeLayout> {
         ],
       ),
     );
+  }
+
+  _builderSowTak() {
+    return showModalBottomSheet(
+        context: context, builder: (context) => BottomTask());
   }
 }
