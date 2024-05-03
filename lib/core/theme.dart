@@ -31,5 +31,10 @@ class ApplicationTheme {
             fontSize: 20,
             color: blackColor,
             fontWeight: FontWeight.bold,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 18,
+            color: greyColor,
+            fontWeight: FontWeight.bold,
           )));
 }

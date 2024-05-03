@@ -1,11 +1,18 @@
 {
- "title" : "قائمة المهام",
- "language" : "اللغة" ,
- "english" : "الانجليزية",
- "arabic" : "العربية",
- "theme_mode" : "النمط",
- "dark" : "ليلي",
- "light" : "نهاري",
- "setting" :"الإعدادات",
- "list": "القائمة"
+  "title": "قائمة المهام",
+  "language": "اللغة",
+  "english": "الانجليزية",
+  "arabic": "العربية",
+  "theme_mode": "النمط",
+  "dark": "ليلي",
+  "light": "نهاري",
+  "setting": "الإعدادات",
+  "list": "القائمة",
+  "add_new_task": "إضافة مهمة جديدة",
+  "enter_your_task": "أدخل مهمتك",
+  "enter_your_description": "أدخل وصف",
+  "select_time": "حدد الوقت",
+  "add": "أضافة",
+  "please_enter_your_task": "الرجاء إدخال مهمتك",
+  "please_enter_your_description": "الرجاء إدخال الوصف الخاص بك"
 }
