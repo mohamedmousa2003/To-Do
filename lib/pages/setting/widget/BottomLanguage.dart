@@ -18,7 +18,10 @@ class BottomLanguage extends StatelessWidget {
       child: Column(
         children: [
           InkWell(
-            onTap: () => provider.chanageLanguage("en"),
+            onTap: () {
+              provider.chanageLanguage("en");
+              Navigator.pop(context);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -38,7 +41,10 @@ class BottomLanguage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InkWell(
-            onTap: () => provider.chanageLanguage("ar"),
+            onTap: () {
+              provider.chanageLanguage("ar");
+              Navigator.pop(context);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

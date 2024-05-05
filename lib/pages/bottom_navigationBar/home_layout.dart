@@ -24,6 +24,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     return Scaffold(
+      extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -31,7 +32,6 @@ class _HomeLayoutState extends State<HomeLayout> {
         },
         child: const Icon(Icons.add),
       ),
-      body: screens[indexSelect],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indexSelect,
         onTap: (index) {
@@ -45,11 +45,18 @@ class _HomeLayoutState extends State<HomeLayout> {
               icon: const Icon(Icons.settings), label: local.setting),
         ],
       ),
+      body: screens[indexSelect],
     );
   }
 
   _builderSowTak() {
     return showModalBottomSheet(
-        context: context, builder: (context) => BottomTask());
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: BottomTask(),
+            ));
   }
 }
