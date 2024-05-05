@@ -16,6 +16,8 @@ class _BottomTaskState extends State<BottomTask> {
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
+    var titleController = TextEditingController();
+    var descController = TextEditingController();
     // TODO: implement build
     return Container(
       padding: const EdgeInsets.all(8),
@@ -24,7 +26,7 @@ class _BottomTaskState extends State<BottomTask> {
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               local.add_new_task,
@@ -32,6 +34,7 @@ class _BottomTaskState extends State<BottomTask> {
               style: theme.textTheme.bodyLarge?.copyWith(color: blackColor),
             ),
             TextFormField(
+              controller: titleController,
               style: theme.textTheme.bodyMedium,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
@@ -41,12 +44,26 @@ class _BottomTaskState extends State<BottomTask> {
               },
               cursorColor: Colors.black,
               decoration: InputDecoration(
-                hintText: local.enter_your_task,
-                labelStyle: theme.textTheme.bodyMedium,
+                //hintText: local.enter_your_task,
+                label: Text(local.task_title),
+                labelStyle: theme.textTheme.bodySmall,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: blueColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: blueColor,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 8),
             TextFormField(
+              controller: descController,
               style: theme.textTheme.bodyMedium,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
@@ -57,7 +74,20 @@ class _BottomTaskState extends State<BottomTask> {
               maxLines: 3,
               textAlign: TextAlign.justify,
               decoration: InputDecoration(
-                hintText: local.enter_your_description,
+                //hintText: local.enter_your_description,
+                label: Text(local.task_description),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: blueColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: blueColor,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 8),
@@ -92,7 +122,25 @@ class _BottomTaskState extends State<BottomTask> {
 
   showCalendar() async {
     var choseData = await showDatePicker(
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: blueColor, // header background color
+              onPrimary: whiteColor, // header text color
+              onSurface: blackColor, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: blueColor, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
       context: context,
+      initialDate: dataTime,
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 356)),
     );

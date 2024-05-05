@@ -8,6 +8,8 @@
   "light": "نهاري",
   "setting": "الإعدادات",
   "list": "القائمة",
+  "task_title": "عنوان المهمة",
+  "task_description": "وصف المهمة",
   "add_new_task": "إضافة مهمة جديدة",
   "enter_your_task": "أدخل مهمتك",
   "enter_your_description": "أدخل وصف",
