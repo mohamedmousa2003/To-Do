@@ -61,7 +61,7 @@ class _BottomTaskState extends State<BottomTask> {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             TextFormField(
               controller: descController,
               style: theme.textTheme.bodyMedium,
@@ -90,7 +90,7 @@ class _BottomTaskState extends State<BottomTask> {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
               local.select_time,
               style: theme.textTheme.bodyMedium,
@@ -103,7 +103,9 @@ class _BottomTaskState extends State<BottomTask> {
                 child: Text(
                   "${dataTime.day}/${dataTime.month}/${dataTime.year}",
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                      color: blueColor
+                  ),
                 )),
             const SizedBox(height: 8),
             ElevatedButton(
