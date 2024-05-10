@@ -90,20 +90,26 @@ class _BottomTaskState extends State<BottomTask> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              local.select_time,
-              style: theme.textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 8),
-            InkWell(
-                onTap: () {
-                  showCalendar();
-                },
-                child: Text(
+          const SizedBox(height: 10),
+          Text(
+            local.select_time,
+            style: theme.textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 8),
+          InkWell(
+              onTap: () {
+                showCalendar();
+              },
+              child: Text(
                   "${dataTime.day}/${dataTime.month}/${dataTime.year}",
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall?.copyWith(color: blueColor),
+                  <<<<<<< HEAD
+              style: theme.textTheme.bodySmall?.copyWith(color: blueColor),
+              =======
+          style: theme.textTheme.bodySmall?.copyWith(
+              color: blueColor
+          ),
+          >>>>>>> master
                 )),
             const SizedBox(height: 8),
             ElevatedButton(
