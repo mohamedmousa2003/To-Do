@@ -103,13 +103,7 @@ class _BottomTaskState extends State<BottomTask> {
               child: Text(
                   "${dataTime.day}/${dataTime.month}/${dataTime.year}",
                   textAlign: TextAlign.center,
-                  <<<<<<< HEAD
-              style: theme.textTheme.bodySmall?.copyWith(color: blueColor),
-              =======
-          style: theme.textTheme.bodySmall?.copyWith(
-              color: blueColor
-          ),
-          >>>>>>> master
+                  style: theme.textTheme.bodySmall?.copyWith(color: blueColor),
                 )),
             const SizedBox(height: 8),
             ElevatedButton(
