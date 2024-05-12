@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todo/firebase/firebase_manager.dart';
+import 'package:todo/models/task_model.dart';
 
 import '../../../core/app_color.dart';
 
@@ -111,7 +113,13 @@ class _BottomTaskState extends State<BottomTask> {
                   backgroundColor: blueColor,
                 ),
                 onPressed: () {
-                  _buildAddTask();
+                  if (_formKey.currentState?.validate() == true) {
+                    TaskModel task = TaskModel(
+                        title: titleController.text,
+                        description: descController.text,
+                        date: dataTime);
+                    FirebaseManager.addTask(task);
+                  }
                 },
                 child: Text(local.add, style: theme.textTheme.bodyMedium)),
           ],
@@ -148,9 +156,5 @@ class _BottomTaskState extends State<BottomTask> {
       dataTime = choseData;
     }
     setState(() {});
-  }
-
-  _buildAddTask() {
-    if (_formKey.currentState?.validate() == true) {}
   }
 }
