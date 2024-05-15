@@ -112,13 +112,20 @@ class _BottomTaskState extends State<BottomTask> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: blueColor,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() == true) {
                     TaskModel task = TaskModel(
                         title: titleController.text,
                         description: descController.text,
                         date: dataTime);
-                    FirebaseManager.addTask(task);
+                    await FirebaseManager.addTask(task).timeout(
+                      Duration(milliseconds: 500),
+                      onTimeout: () {
+                        print("task add ");
+                        Navigator.pop(context);
+                        // used alert or aad package toast
+                      },
+                    );
                   }
                 },
                 child: Text(local.add, style: theme.textTheme.bodyMedium)),
