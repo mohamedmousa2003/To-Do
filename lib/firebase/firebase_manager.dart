@@ -17,6 +17,7 @@ class FirebaseManager {
     var collectionTask = getTasksCollection(); // collection
     var docRef = collectionTask.doc(); // document
     task.id = docRef.id; // document id
-    return await docRef.set(task);
+    return await docRef.set(
+        task); // take object of task model and take the task and put it in firebase
   }
 }
