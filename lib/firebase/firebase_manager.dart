@@ -14,8 +14,7 @@ class FirebaseManager {
   }
 
   static Future<void> addTask(TaskModel task) async {
-    var collectionTask = getTasksCollection(); // collection
-    var docRef = collectionTask.doc(); // document
+    var docRef = getTasksCollection().doc(); // collection and // document
     task.id = docRef.id; // document id
     return await docRef.set(
         task); // take object of task model and take the task and put it in firebase
