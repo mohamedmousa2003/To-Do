@@ -13,13 +13,14 @@ class BottomTask extends StatefulWidget {
 class _BottomTaskState extends State<BottomTask> {
   DateTime dataTime = DateTime.now();
   final _formKey = GlobalKey<FormState>();
+  var titleController = TextEditingController();
+  var descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
-    var titleController = TextEditingController();
-    var descController = TextEditingController();
+
     // TODO: implement build
     return Container(
       padding: const EdgeInsets.all(8),
