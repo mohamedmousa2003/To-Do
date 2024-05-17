@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo/firebase/firebase_manager.dart';
 import 'package:todo/models/task_model.dart';
 
@@ -122,7 +123,15 @@ class _BottomTaskState extends State<BottomTask> {
                     await FirebaseManager.addTask(task).timeout(
                       Duration(milliseconds: 500),
                       onTimeout: () {
-                        print("task add ");
+                        Fluttertoast.showToast(
+                          msg: local.the_task_was_added_successfully,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 5,
+                          backgroundColor: blueColor,
+                          textColor: blackColor,
+                          fontSize: 20,
+                        );
                         Navigator.pop(context);
                         // used alert or aad package toast
                       },

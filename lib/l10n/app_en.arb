@@ -16,5 +16,6 @@
   "select_time": "Select time",
   "add": "Add",
   "please_enter_your_task": "Please enter your task",
-  "please_enter_your_description": "Please enter your description"
+  "please_enter_your_description": "Please enter your description",
+  "the_task_was_added_successfully": "The task was added successfully"
 }
