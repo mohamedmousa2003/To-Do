@@ -16,5 +16,6 @@
   "select_time": "حدد الوقت",
   "add": "أضافة",
   "please_enter_your_task": "الرجاء إدخال مهمتك",
-  "please_enter_your_description": "الرجاء إدخال الوصف الخاص بك"
+  "please_enter_your_description": "الرجاء إدخال الوصف الخاص بك",
+  "the_task_was_added_successfully": "تمت إضافة المهمة بنجاح"
 }
