@@ -9,8 +9,6 @@ import 'package:todo/pages/splash/splash_screen.dart';
 
 import 'firebase_options.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
