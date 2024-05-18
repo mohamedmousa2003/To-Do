@@ -1,6 +1,6 @@
 class TaskModel {
   String? id;
-
+  static const String collectionName = "tasks";
   String? title;
   String? description;
   DateTime? date;

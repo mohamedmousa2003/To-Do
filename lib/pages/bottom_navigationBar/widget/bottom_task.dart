@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:todo/firebase/firebase_manager.dart';
+import 'package:todo/models/task_model.dart';
 
 import '../../../core/app_color.dart';
 
@@ -11,13 +14,14 @@ class BottomTask extends StatefulWidget {
 class _BottomTaskState extends State<BottomTask> {
   DateTime dataTime = DateTime.now();
   final _formKey = GlobalKey<FormState>();
+  var titleController = TextEditingController();
+  var descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
-    var titleController = TextEditingController();
-    var descController = TextEditingController();
+
     // TODO: implement build
     return Container(
       padding: const EdgeInsets.all(8),
@@ -110,8 +114,29 @@ class _BottomTaskState extends State<BottomTask> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: blueColor,
                 ),
-                onPressed: () {
-                  _buildAddTask();
+                onPressed: () async {
+                  if (_formKey.currentState?.validate() == true) {
+                    TaskModel task = TaskModel(
+                        title: titleController.text,
+                        description: descController.text,
+                        date: dataTime);
+                    await FirebaseManager.addTask(task).timeout(
+                      Duration(milliseconds: 500),
+                      onTimeout: () {
+                        Fluttertoast.showToast(
+                          msg: local.the_task_was_added_successfully,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 5,
+                          backgroundColor: blueColor,
+                          textColor: blackColor,
+                          fontSize: 20,
+                        );
+                        Navigator.pop(context);
+                        // used alert or aad package toast
+                      },
+                    );
+                  }
                 },
                 child: Text(local.add, style: theme.textTheme.bodyMedium)),
           ],
@@ -148,9 +173,5 @@ class _BottomTaskState extends State<BottomTask> {
       dataTime = choseData;
     }
     setState(() {});
-  }
-
-  _buildAddTask() {
-    if (_formKey.currentState?.validate() == true) {}
   }
 }
