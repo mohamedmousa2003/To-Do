@@ -56,20 +56,19 @@ class TaskWidget extends StatelessWidget {
                 width: 6,
                 height: 80,
                 decoration: BoxDecoration(
-                    color: blueColor, borderRadius: BorderRadius.circular(20)),
+                    color: checkDone ? greenColor : blueColor,
+                    borderRadius: BorderRadius.circular(20)),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(task.title ?? "",
-                      style: checkDone
-                          ? theme.textTheme.bodyMedium?.copyWith(
-                              color: greenColor,
-                            )
-                          : theme.textTheme.bodyMedium?.copyWith(
-                              color: blueColor,
-                            )),
+                  Text(
+                    task.title ?? "",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: checkDone ? greenColor : blueColor,
+                    ),
+                  ),
                   Text(task.description ?? "",
                       style: checkDone
                           ? theme.textTheme.bodySmall?.copyWith(
