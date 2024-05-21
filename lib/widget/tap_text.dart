@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../core/app_color.dart';
-class TapText extends StatelessWidget {
-  TapText({super.key});
-  var titleController =TextEditingController();
+class CustomTextFormField extends StatelessWidget {
+  CustomTextFormField(
+      {super.key,
+      required this.controller,
+      required this.title,
+      required this.validator,
+      this.maxLines});
+
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+  String title;
+  int? maxLines = 1;
+
   @override
   Widget build(BuildContext context) {
-    var theme =Theme.of(context);
-    var local = AppLocalizations.of(context)!;
-    return Scaffold (
-      body:  TextFormField(
-        controller: titleController,
+    var theme = Theme.of(context);
+    return Scaffold(
+      body: TextFormField(
+        controller: controller,
         style: theme.textTheme.bodyMedium,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return "please enter your task";
-          }
-          return null;
-        },
+        validator: validator,
         cursorColor: Colors.black,
         decoration: InputDecoration(
           //hintText: local.enter_your_task,
-          label: Text(local.task_title),
+          label: Text(title),
           labelStyle: theme.textTheme.bodySmall,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),

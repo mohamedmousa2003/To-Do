@@ -14,7 +14,7 @@ class TaskModel {
     this.isDone = false,
   });
 
-  // TO CONVERT object to Map
+  // TO CONVERT object to Map<String, dynamic>
   Map<String, dynamic> toJason() {
     return {
       'id': id,

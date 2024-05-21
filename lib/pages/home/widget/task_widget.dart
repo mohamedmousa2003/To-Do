@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo/core/app_color.dart';
+import 'package:todo/firebase/firebase_manager.dart';
+import 'package:todo/models/task_model.dart';
 
 class TaskWidget extends StatelessWidget {
-  const TaskWidget({super.key});
+  TaskModel task;
+
+  TaskWidget({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    bool checkDone = task.isDone!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
@@ -27,6 +32,7 @@ class TaskWidget extends StatelessWidget {
               onPressed: (context) {
                 flex:
                 2;
+                FirebaseManager.deleteTask(task.id ?? "");
               },
               backgroundColor: redColor,
               foregroundColor: whiteColor,
@@ -54,37 +60,72 @@ class TaskWidget extends StatelessWidget {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Play basket ball",
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: blueColor,
-                    ),
-                  ),
+                  Text(task.title ?? "",
+                      style: checkDone
+                          ? theme.textTheme.bodyMedium?.copyWith(
+                              color: greenColor,
+                            )
+                          : theme.textTheme.bodyMedium?.copyWith(
+                              color: blueColor,
+                            )),
+                  Text(task.description ?? "",
+                      style: checkDone
+                          ? theme.textTheme.bodySmall?.copyWith(
+                              color: greenColor,
+                            )
+                          : theme.textTheme.bodySmall?.copyWith(
+                              color: blueColor,
+                            )),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(
                         Icons.access_time,
                         color: greyColor,
                       ),
                       Text(
-                        "10:30 Am",
+                        "${task.date?.day}/${task.date?.month}/${task.date?.year}",
                         style: theme.textTheme.bodySmall,
                       )
                     ],
                   ),
                 ],
               ),
-              Container(
-                height: 34,
-                width: 69,
-                decoration: BoxDecoration(
-                    color: blueColor, borderRadius: BorderRadius.circular(8)),
-                child: Icon(
-                  Icons.check,
-                  color: whiteColor,
-                ),
-              ),
+              checkDone
+                  ? Container(
+                      height: 34,
+                      width: 69,
+                      decoration: BoxDecoration(
+                          color: greenColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "Done",
+                        style: TextStyle(
+                          color: whiteColor,
+                        ),
+                      ),
+                    )
+                  : InkWell(
+                      onTap: () {
+                        task.isDone = true;
+                        FirebaseManager.updateTask(task);
+                      },
+                      child: Container(
+                        height: 34,
+                        width: 69,
+                        decoration: BoxDecoration(
+                            color: blueColor,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Icon(
+                          Icons.check,
+                          color: whiteColor,
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
