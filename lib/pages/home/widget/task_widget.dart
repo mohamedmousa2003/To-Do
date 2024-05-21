@@ -41,7 +41,6 @@ class TaskWidget extends StatelessWidget {
             ),
           ],
         ),
-
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           height: 115,
