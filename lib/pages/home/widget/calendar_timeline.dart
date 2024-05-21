@@ -1,3 +1,4 @@
+/*
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class CalendarTimeline extends StatefulWidget {
 }
 
 class _CalendarTimelineState extends State<CalendarTimeline> {
-  var _selectedValue = null;
+  var _selectedValue = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     return DatePicker(
       height: 110,
       DateTime.now(),
-      initialSelectedDate: DateTime.now(),
+      initialSelectedDate: _selectedValue,
       selectionColor: redColor,
       selectedTextColor: Colors.white,
       locale: provider.localeProvider,
@@ -41,3 +42,5 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
     );
   }
 }
+
+*/

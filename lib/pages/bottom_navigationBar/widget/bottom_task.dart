@@ -119,7 +119,7 @@ class _BottomTaskState extends State<BottomTask> {
                     TaskModel task = TaskModel(
                         title: titleController.text,
                         description: descController.text,
-                        date: dataTime);
+                        date: DateUtils.dateOnly(dataTime));
                     await FirebaseManager.addTask(task).timeout(
                       Duration(milliseconds: 500),
                       onTimeout: () {
