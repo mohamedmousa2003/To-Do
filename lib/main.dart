@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:todo/core/my-provider.dart';
 import 'package:todo/core/theme.dart';
 import 'package:todo/pages/bottom_navigationBar/home_layout.dart';
+import 'package:todo/pages/login/login.dart';
+import 'package:todo/pages/redister/register.dart';
 import 'package:todo/pages/splash/splash_screen.dart';
 
 import 'firebase_options.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TO DO',
-      initialRoute: SplashScreen.routeName,
+      initialRoute: Register.routeName,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(provider.localeProvider),
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         HomeLayout.routeName: (context) => HomeLayout(),
+        Register.routeName: (context) => Register(),
+        Login.routName: (context) => Login(),
       },
     );
   }
