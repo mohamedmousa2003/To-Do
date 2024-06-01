@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TO DO',
-      initialRoute: Register.routeName,
+      initialRoute: Login.routName,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(provider.localeProvider),
@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         HomeLayout.routeName: (context) => HomeLayout(),
-        Register.routeName: (context) => Register(),
         Login.routName: (context) => Login(),
+        Register.routeName: (context) => Register(),
       },
     );
   }
