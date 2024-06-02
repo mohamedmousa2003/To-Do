@@ -30,7 +30,7 @@ class Register extends StatelessWidget {
               top: mediaQuery.height * 0.1,
               left: mediaQuery.width * 0.42,
               child: Text(
-                "Login",
+                "Register",
                 style: theme.textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               )),
@@ -107,26 +107,41 @@ class Register extends StatelessWidget {
                           keyboardType: TextInputType
                               .emailAddress, // as to show @ in keyboard
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                          ),
-                          onPressed: () {
-                            register();
-                          },
-                          child: Text(
-                            "register",
-                            style: theme.textTheme.bodyMedium,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: MaterialButton(
+                              onPressed: () {
+                                register();
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Register",
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: whiteColor,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text("Already have an account"),
+                          child: Text("Already have an account",style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.blue
+                          ),),
                         ),
                       ],
                     ),
