@@ -1,16 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/app_color.dart';
+import 'package:todo/dialog_utils.dart';
 
 import '../../widget/tap_text.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   Register({super.key});
 
   static String routeName = "register";
-  var full_Name_Controller = TextEditingController();
-  var password_Controller = TextEditingController();
-  var confirmation_Password_Controller = TextEditingController();
-  var email_Controller = TextEditingController();
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  var full_Name_Controller = TextEditingController(text: "mohamed");
+
+  var password_Controller = TextEditingController(text: "123456");
+
+  var confirmation_Password_Controller = TextEditingController(text: "123456");
+
+  var email_Controller =
+      TextEditingController(text: "Mohamed11520031@gmail.com");
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -65,7 +78,7 @@ class Register extends StatelessWidget {
                               return "please enter your email";
                             }
                             final bool emailValid = RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[com]+")
+                                r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[com]+")
                                 .hasMatch(text);
                             if (!emailValid) {
                               return "Please enter valid email content @[a-zA-Z0-9]";
@@ -120,7 +133,7 @@ class Register extends StatelessWidget {
                               },
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Register",
@@ -140,7 +153,7 @@ class Register extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           child: Text("Already have an account",style: theme.textTheme.bodyMedium?.copyWith(
-                            color: Colors.blue
+                              color: Colors.blue
                           ),),
                         ),
                       ],
@@ -155,9 +168,69 @@ class Register extends StatelessWidget {
     );
   }
 
-  void register() {
+  void register() async {
     if (formKey.currentState?.validate() == true) {
       // register
+      // show loading
+      DialogUtils.showLoading(context, "Loading...");
+      //await Future.delayed(Duration(seconds: 3));
+      try {
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email_Controller.text,
+          password: password_Controller.text,
+        );
+        // hide loading
+        DialogUtils.hideLoading(context);
+        // show message
+        DialogUtils.ShowMessage(context, "register successfully",
+            messageTitle: "success",
+            posActionName: "OK",
+            titleTextStyle: TextStyle(
+                color: greenColor, fontSize: 30, fontWeight: FontWeight.bold),
+            barrierDismissible: false);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          // hide loading
+          DialogUtils.hideLoading(context);
+          // show message
+          DialogUtils.ShowMessage(context, "The password provided is too weak.",
+              messageTitle: "Error",
+              posActionName: "OK",
+              titleTextStyle: TextStyle(
+                color: redColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+              barrierDismissible: false);
+        } else if (e.code == 'email-already-in-use') {
+          // hide loading
+          DialogUtils.hideLoading(context);
+          // show message
+          DialogUtils.ShowMessage(
+              context, "The account already exists for that email.",
+              messageTitle: "Error",
+              titleTextStyle: TextStyle(
+                color: redColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+              posActionName: "OK",
+              barrierDismissible: false);
+        }
+      } catch (e) {
+        // hide loading
+        DialogUtils.hideLoading(context);
+        // show message
+        DialogUtils.ShowMessage(context, e.toString(),
+            messageTitle: "Error",
+            posActionName: "OK",
+            titleTextStyle: TextStyle(
+              color: redColor,
+              fontSize: 30,
+            ),
+            barrierDismissible: false);
+      }
     }
   }
 }
