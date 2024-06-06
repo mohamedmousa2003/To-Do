@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:todo/pages/bottom_navigationBar/home_layout.dart';
+import 'package:todo/pages/login/login.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -12,7 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, HomeLayout.routeName);
+      Navigator.pushReplacementNamed(context,Login.routName);
     });
     return Scaffold(
       body: Image.asset(

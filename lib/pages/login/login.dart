@@ -1,14 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/app_color.dart';
 import 'package:todo/pages/redister/register.dart';
 import 'package:todo/widget/tap_text.dart';
 
-class Login extends StatelessWidget {
+import '../../dialog_utils.dart';
+import '../bottom_navigationBar/home_layout.dart';
+
+class Login extends StatefulWidget {
   Login({super.key});
 
   static String routName = "login";
-  var password_Controller = TextEditingController();
-  var email_Controller = TextEditingController();
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  var password_Controller = TextEditingController(text: "123456");
+
+  var email_Controller = TextEditingController(text: "mohamed@gmail.com");
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -137,9 +149,52 @@ class Login extends StatelessWidget {
     );
   }
 
-  void login() {
+  void login() async{
     if (formKey.currentState?.validate() == true) {
-      // register
+      // Login
+      // show loading
+      DialogUtils.showLoading(context, "Loading...");
+      try {
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email_Controller.text,
+            password: password_Controller.text
+        );
+        // hide loading
+        DialogUtils.hideLoading(context);
+        // show message
+        DialogUtils.ShowMessage(
+            context,
+            "Login successfully",
+            messageTitle: "success",
+            posActionName: "OK",
+            onPressedPosActionName: () {
+              Navigator.pushNamed(context,  HomeLayout.routeName);
+            },
+            titleTextStyle: TextStyle(
+                color: greenColor,
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+            ),
+            barrierDismissible: false
+        );
+        print("Login success");
+      print(credential.user?.uid??"");
+      } catch(e){
+        // hide loading
+        DialogUtils.hideLoading(context);
+        // show message
+        DialogUtils.ShowMessage(
+            context,
+            e.toString(),
+            messageTitle: "Error",
+            posActionName: "OK",
+            titleTextStyle: TextStyle(
+              color: redColor,
+              fontSize: 30,
+            ),
+            barrierDismissible: false
+        );
+      }
     }
   }
 }
