@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/my-provider.dart';
+import 'package:todo/pages/login/login.dart';
 import 'package:todo/pages/setting/widget/BottomLanguage.dart';
 import 'package:todo/pages/setting/widget/BottomTheme.dart';
 
@@ -50,8 +51,20 @@ class _SettingScreenState extends State<SettingScreen> {
               style: theme.textTheme.bodyMedium,
             ),
             builderSetting(index: 1, local: local.dark),
+            SizedBox(height: 20),
+            TextButton(onPressed: (){
+              Navigator.popAndPushNamed(context, Login.routName);
+            }, child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.login_outlined ,color: blueColor,),
+                SizedBox(width: 10),
+                Text("Logout" ,style:  TextStyle(color: blueColor ,fontSize: 25),),
+              ],
+            ))
           ],
         ),
+      
       ),
     );
   }
