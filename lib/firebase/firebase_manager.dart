@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/models/my_user.dart';
 import 'package:todo/models/task_model.dart';
 
 class FirebaseManager {
@@ -38,5 +39,25 @@ class FirebaseManager {
         .where("date",
             isEqualTo: DateUtils.dateOnly(dateTime).millisecondsSinceEpoch)
         .snapshots();
+  }
+
+  // create collection MyUser as to make user to local fireStore
+  static CollectionReference<MyUser> getUsersCollection() {
+    return // FirebaseFirestore.instance.collection('movies').
+        FirebaseFirestore.instance
+            .collection(MyUser.collectionName)
+            .withConverter<MyUser>(
+              // MyUser الحاجه اللي بخزنه
+              fromFirestore: (snapshot, options) =>
+                  MyUser.fromJson(snapshot.data()!), // convert map to object
+              toFirestore: (user, options) =>
+                  user.toJason(), //convert object to map <String, dynamic>
+            );
+  }
+
+  //عاوز اجيب user من fireStore
+  // used in register
+  static Future<void> addUserToFireStore(MyUser myUser) {
+    return getUsersCollection().doc(myUser.id).set(myUser);
   }
 }

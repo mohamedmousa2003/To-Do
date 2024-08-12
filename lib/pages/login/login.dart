@@ -162,18 +162,13 @@ class _LoginState extends State<Login> {
         // hide loading
         DialogUtils.hideLoading(context);
         // show message
-        DialogUtils.ShowMessage(
-            context,
-            "Login successfully",
+        DialogUtils.showMessage(context, "Login successfully",
             messageTitle: "success",
-            posActionName: "OK",
-            onPressedPosActionName: () {
-              Navigator.pushNamed(context,  HomeLayout.routeName);
-            },
+            posActionName: "OK", onPressedPosActionName: () {
+          Navigator.pushNamed(context, HomeLayout.routeName);
+        },
             titleTextStyle: TextStyle(
-                color: greenColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
+                color: greenColor, fontSize: 30, fontWeight: FontWeight.bold
             ),
             barrierDismissible: false
         );
@@ -183,17 +178,14 @@ class _LoginState extends State<Login> {
         // hide loading
         DialogUtils.hideLoading(context);
         // show message
-        DialogUtils.ShowMessage(
-            context,
-            e.toString(),
+        DialogUtils.showMessage(context, e.toString(),
             messageTitle: "Error",
             posActionName: "OK",
             titleTextStyle: TextStyle(
               color: redColor,
               fontSize: 30,
             ),
-            barrierDismissible: false
-        );
+            barrierDismissible: false);
       }
     }
   }

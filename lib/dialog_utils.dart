@@ -31,7 +31,7 @@ class DialogUtils {
   }
 
   // show message
-  static void ShowMessage(
+  static void showMessage(
     BuildContext context,
     String messageContent, {
     String? messageTitle,
